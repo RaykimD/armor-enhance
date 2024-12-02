@@ -233,7 +233,30 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 p-4">
             <div className="max-w-7xl mx-auto">
-                <h1 className="text-3xl font-bold text-white mb-8 text-center">코창서버 방어구 강화 시뮬레이터</h1>
+    <div className="flex justify-between items-center mb-8">
+        <button className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+            ← 돌아가기
+        </button>
+        <h1 className="text-3xl font-bold text-white text-center">코창서버 방어구 강화 시뮬레이터</h1>
+        <button
+            onClick={() => {
+                if (confirm('모든 진행 상황이 초기화됩니다. 계속하시겠습니까?')) {
+                    setSelectedArmor(null);
+                    setEnhanceLogs([]);
+                    setUsedResources({
+                        money: 0,
+                        luckyStone: 0,
+                        advancedLuckyStone: 0,
+                        starBalloonTicket: 0
+                    });
+                    setDrinkUsed(false);
+                }
+            }}
+            className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
+        >
+            초기화
+        </button>
+    </div>
 
                 {!selectedArmor ? (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -352,6 +375,58 @@ export default function Home() {
 
                         {/* 우측 영역 - 강화 확률, 로그, 사용된 재화 */}
                         <div className="space-y-6">
+                            <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+    <h2 className="text-2xl font-bold text-white mb-4">강화 등급 이동</h2>
+    <div className="flex items-center space-x-4">
+        <button 
+            onClick={() => {
+                if (selectedArmor && selectedArmor.enhancement > 0) {
+                    setSelectedArmor(prev => prev && ({
+                        ...prev,
+                        enhancement: prev.enhancement - 1,
+                        enhanceStats: calculateEnhancementStats(prev.enhancement - 1)
+                    }));
+                }
+            }}
+            className="text-white hover:text-gray-300"
+            disabled={!selectedArmor || selectedArmor.enhancement <= 0}
+        >
+            &lt;
+        </button>
+        <select 
+            value={selectedArmor?.enhancement || 0}
+            onChange={(e) => {
+                const newEnhancement = Number(e.target.value);
+                setSelectedArmor(prev => prev && ({
+                    ...prev,
+                    enhancement: newEnhancement,
+                    enhanceStats: calculateEnhancementStats(newEnhancement)
+                }));
+            }}
+            className="bg-gray-700 text-white px-4 py-2 rounded-lg flex-grow text-center"
+            disabled={!selectedArmor}
+        >
+            {Array.from({length: 21}, (_, i) => (
+                <option key={i} value={i}>{i}강</option>
+            ))}
+        </select>
+        <button 
+            onClick={() => {
+                if (selectedArmor && selectedArmor.enhancement < 20) {
+                    setSelectedArmor(prev => prev && ({
+                        ...prev,
+                        enhancement: prev.enhancement + 1,
+                        enhanceStats: calculateEnhancementStats(prev.enhancement + 1)
+                    }));
+                }
+            }}
+            className="text-white hover:text-gray-300"
+            disabled={!selectedArmor || selectedArmor.enhancement >= 20}
+        >
+            &gt;
+        </button>
+    </div>
+</div>
                             <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
                                 <h2 className="text-2xl font-bold text-white mb-4">강화 확률</h2>
                                 <div className="text-gray-300">
