@@ -21,7 +21,7 @@ export type Armor = {
 
 export type EnhanceLog = {
     type: 'success' | 'maintain' | 'degrade';
-    armorType: string;
+    armorType: ArmorType;
     enhancement: number;
     timestamp: number;
 };
