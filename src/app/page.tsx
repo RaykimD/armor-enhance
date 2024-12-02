@@ -1,6 +1,6 @@
 // src/app/page.tsx
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Armor, ArmorStats, EnhanceLog, UsedResources, PotentialOption, ArmorTypeKorean } from '../types';
 
 // 상수들
