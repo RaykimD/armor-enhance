@@ -55,7 +55,7 @@ const ENHANCEMENT_STATS: Record<number, Partial<ArmorStats>> = {
     16: { health: 3, attackSpeed: 1 },
     17: { health: 6, attack: 1 },
     18: { health: 3, innerForce: 2, evasion: 1 },
-    19: { health: 3, attackSpeed: 1 },
+    19: { health: 9 },
     20: { health: 3, attack: 1, evasion: 1 }
 };
 
