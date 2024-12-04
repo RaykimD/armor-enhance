@@ -76,7 +76,7 @@ const ENHANCEMENT_RATES: Record<number, { success: number, maintain: number, deg
    15: { success: 25, maintain: 22.5, degrade: 52.5 },
    16: { success: 20, maintain: 24.0, degrade: 56.0 },
    17: { success: 20, maintain: 24.0, degrade: 56.0 },
-   18: { success: 15, maintain: 25.5, degrade: 59.5 },
+   18: { success: 20, maintain: 24.0, degrade: 56.0 },
    19: { success: 15, maintain: 25.5, degrade: 59.5 },
    20: { success: 15, maintain: 25.5, degrade: 59.5 }
 };
